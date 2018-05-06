@@ -1,0 +1,24 @@
+{
+  "name": "friend-finder",
+  "version": "1.0.0",
+  "description": "find friends based off of your quiz answers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merrazquin/friend-finder.git"
+  },
+  "author": "Marcela Errazquin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/merrazquin/friend-finder/issues"
+  },
+  "homepage": "https://github.com/merrazquin/friend-finder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  }
+}
