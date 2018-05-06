@@ -1,6 +1,28 @@
+require('dotenv').config()
+const mongo_uri = process.env.MONGODB_URI,
+    mongodb = require('mongodb')
+
 let friends = require('../data/friends')
 
 module.exports = (app, path, root) => {
+
+    mongodb.MongoClient.connect(mongo_uri, (err, client) => {
+        if(err) throw err
+
+        let db = client.db('friendsDB')
+        let friendsCollection = db.collection('friends')
+
+        friendsCollection.insert(friends, (err, result) => {
+            if(err) throw err
+
+            friends.find().toArray((err, docs) => {
+                if(err) throw err
+                console.log('got it!!!')
+                console.log(docs)
+            })
+        })
+    })
+
     app.get('/api/friends', (req, res) => {
         res.json(friends)
     })
