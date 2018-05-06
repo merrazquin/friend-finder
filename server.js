@@ -6,6 +6,7 @@ const express = require("express"),
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(express.static('app/public'))
 
 require('./app/routing/apiRoutes')(app, path, __dirname)
 require('./app/routing/htmlRoutes')(app, path, __dirname)
