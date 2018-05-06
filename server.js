@@ -4,10 +4,12 @@ const express = require("express"),
     app = express(),
     PORT = process.env.PORT || 3000
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
+require('./app/routing/apiRoutes')(app, path, __dirname)
+require('./app/routing/htmlRoutes')(app, path, __dirname)
 
 app.listen(PORT, () => {
     console.log('app listening on', PORT)
 })
-
-require('./app/routing/htmlRoutes')(app, path, __dirname)
