@@ -24,6 +24,7 @@ $(function () {
         };
 
         $.post('/api/friends', userData, function (closestMatch) {
+            $('#survey').trigger('reset')
             alert('closest match: ' + closestMatch.name);
         });
     }
