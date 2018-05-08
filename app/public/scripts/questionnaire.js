@@ -23,9 +23,11 @@ $(function () {
             scores: $('select').map(function () { return $(this).val(); }).get()
         };
 
+        $('#matchModal').modal('show');
         $.post('/api/friends', userData, function (closestMatch) {
-            $('#survey').trigger('reset')
-            alert('closest match: ' + closestMatch.name);
+            $('#survey').trigger('reset');
+            $('#match-name').text(closestMatch.name);
+            $('#match-image').attr('src', closestMatch.photo)
         });
     }
 
@@ -59,6 +61,11 @@ $(function () {
             );
         })
     }
+
+    $('#matchModal').on('hidden.bs.modal', function (event) {
+        $('#match-name').text('Loading...');
+        $('#match-image').attr('src', '');
+    });
 
     displayQuestions();
 });
