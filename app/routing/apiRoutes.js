@@ -4,8 +4,9 @@ const mongo_uri = process.env.MONGODB_URI,
     mongodb = require('mongodb'),
     COLLECTION_NAME = 'friends'
 
-module.exports = (app, path, root) => {
+module.exports = (app) => {
 
+    // retrieve friends from mongo DB, return JSON in response
     app.get('/api/friends', (req, res) => {
         mongodb.MongoClient.connect(mongo_uri, (err, client) => {
             if (err) throw err
@@ -23,6 +24,7 @@ module.exports = (app, path, root) => {
         })
     })
 
+    // accecpt a post request, find the closest match in the database, return it in response, add posted friend to database
     app.post('/api/friends', (req, res) => {
         mongodb.MongoClient.connect(mongo_uri, (err, client) => {
             if (err) throw err
@@ -33,13 +35,14 @@ module.exports = (app, path, root) => {
                 closestMatch,
                 friendsCollection = db.collection(COLLECTION_NAME)
 
+            // pull all friends from database
             friendsCollection.find({}).toArray((err, friends) => {
                 if (err) throw err
 
                 friends.forEach(friend => {
                     // map - create a new array of the differences between the 2 score arrays
                     // reduce - then, sum all values in the new array
-                    let diff = incomingScores.map((val, index) => Math.abs(val - friend.scores[index])).reduce((acc, val) => { return acc + val })
+                    let diff = incomingScores.map((val, index) => Math.abs(friend.scores[index] - val)).reduce((acc, val) => acc + val)
 
                     // if the current diff is lower than the minDiff, update the minDiff and track this friend as the closest match
                     if (diff < minDiff) {
@@ -48,10 +51,10 @@ module.exports = (app, path, root) => {
                     }
                 })
 
-                // return the closest match
+                // return the closest match in the response
                 res.json(closestMatch)
 
-                // add this post to the database
+                // add this friend to the database
                 friendsCollection.insert(req.body, (err, result) => {
                     if (err) throw err
 

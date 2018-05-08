@@ -1,6 +1,10 @@
-module.exports = (app, path, root) => {
+const path = require('path')
+
+module.exports = (app) => {
+    // catch-all for any path
     app.get('*', (req, res) => {
-        let pageName = req.url === '/survey' ? 'app/public/survey.html' : 'app/public/home.html'
-        res.sendFile(path.join(root, pageName))
+        // if the requested URL is /survey, serve survey.html, otherwise, serve home.html
+        let pageName = req.url === '/survey' ? 'survey.html' : 'home.html'
+        res.sendFile(path.join(__dirname, '../public/' + pageName))
     })
 }

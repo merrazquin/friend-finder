@@ -4,13 +4,18 @@ const express = require("express"),
     app = express(),
     PORT = process.env.PORT || 3000
 
+// use BodyParser to parse JSON requests
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+// use static to serve up JS scripts
 app.use(express.static('app/public'))
 
-require('./app/routing/apiRoutes')(app, path, __dirname)
-require('./app/routing/htmlRoutes')(app, path, __dirname)
+// set up API and HTML routes
+require('./app/routing/apiRoutes')(app)
+require('./app/routing/htmlRoutes')(app)
 
+// start server
 app.listen(PORT, () => {
     console.log('app listening on', PORT)
 })
