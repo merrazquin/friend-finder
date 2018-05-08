@@ -13,12 +13,12 @@
 
 <body>
     <div class="container">
-        <h2>Survey Questions</h2>
+        <h3>Survey Questions</h2>
         <hr />
 
-        <h3>
+        <h4>
             <strong>About You</strong>
-        </h3>
+        </h4>
         <form id="survey">
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -30,8 +30,18 @@
             </div>
             <div id="questions"></div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                <i class="fa fa-check-circle-o" aria-hidden="true"></i> Submit</button>
         </form>
+        <hr>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p>
+                <a href="/api/friends">API Friends List</a> |
+                <a href="https://github.com/merrazquin/friend-finder">GitHub Repo</a>
+            </p>
+        </div>
     </div>
 
     <div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="matchModalLabel" aria-hidden="true">

@@ -42,8 +42,8 @@ $(function () {
                         $('<label>')
                             .attr('for', qID)
                             .append(
-                                $('<h3>').html('<strong>Question ' + (index + 1) + '</strong>'),
-                                $('<h4>').text(question)
+                                $('<h4>').html('<strong>Question ' + (index + 1) + '</strong>'),
+                                $('<h5>').text(question)
                             ),
                         $('<select required>')
                             .attr('id', qID)
